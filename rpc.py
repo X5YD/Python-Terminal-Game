@@ -7,15 +7,6 @@ def rpc_storage():
            "scissors" : "paper"}
     return rpc
     
-    
-def rpc_condition(rpc, bot_choice, user_choice):
-    if bot_choice == user_choice:
-        return "Draw"
-    elif rpc[bot_choice] == user_choice:
-        return(f"Bot Played {bot_choice.capitalize()} You Lost")
-    else:
-        return(f"Bot Played {bot_choice.capitalize()} You Won")
-
 
 def rpc_game():
     rpc = rpc_storage()
@@ -28,18 +19,19 @@ def rpc_game():
             if user_choice == "quit":
                 break
             bot_choice = random.choice(["rock", "paper", "scissors"])
-            result = rpc_condition(rpc, bot_choice, user_choice)
             if user_choice in rpc:
-                if result == f"Bot Played {bot_choice.capitalize()} You Won":
-                    user_rpc_score += 1
-                    print(rpc_condition(rpc, bot_choice, user_choice))
-                    print(user_rpc_score)
-                    print(bot_rpc_score)
-                elif result == f"Bot Played {bot_choice.capitalize()} You Lost":
+                if bot_choice == user_choice:
+                    print("Draw")
+                elif rpc[bot_choice] == user_choice:
                     bot_rpc_score += 1
-                    print(rpc_condition(rpc, bot_choice, user_choice))
-                    print(user_rpc_score)
-                    print(bot_rpc_score)
+                    print(f"Bot Played : {bot_choice}")
+                    print(f"Your Score : {user_rpc_score}")
+                    print(f"Bot Score : {bot_rpc_score}")
+                else:
+                    user_rpc_score += 1
+                    print(f"Bot Played : {bot_choice}")
+                    print(f"Your Score : {user_rpc_score}")
+                    print(f"Bot Score : {bot_rpc_score}")
             else:
                 print("Choose Between Rock Paper Scissors")
             if user_rpc_score == 5:
